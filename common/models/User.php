@@ -69,14 +69,14 @@ class User extends ActiveRecord implements IdentityInterface
 
 
     /**
-     * Finds user by login
+     * Finds user by $username
      *
-     * @param string $login
+     * @param string $username
      * @return static|null
      */
-    public static function findByLogin($login)
+    public static function findByUsername($username)
     {
-        return static::findOne(['login' => $login]);
+        return static::findOne(['login' => $username]);
     }
 
 
@@ -112,7 +112,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $password == md5($this->password);
+        return  md5($password) == $this->password;
     }
 
     /**
