@@ -25,7 +25,7 @@ class User extends CommonUser
 
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'filter'=>['not', ['id' => $this->email]], 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'filter'=>['not', ['email' => $this->email]], 'message' => 'This email address has already been taken.'],
 
             ['password', 'string', 'min' => 6],
 
