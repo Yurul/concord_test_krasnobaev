@@ -39,7 +39,7 @@ class UserController extends Controller
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('/default/users/index', [
+        return $this->render('/users/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -53,7 +53,7 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('/default/users/view', [
+        return $this->render('/users/view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -71,7 +71,7 @@ class UserController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('/default/users/create', [
+        return $this->render('/users/create', [
             'roles' => $this->getRoles(),
             'model' => $model,
         ]);
@@ -92,7 +92,7 @@ class UserController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('/default/users/update', [
+        return $this->render('/users/update', [
             'roles' => $this->getRoles(),
             'model' => $model,
         ]);
