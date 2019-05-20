@@ -21,7 +21,7 @@ class Group extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{group}}';
+        return '{{groups}}';
     }
 
     /**

@@ -31,7 +31,7 @@ class m130524_201442_init extends Migration
             'password' => $this->string()->notNull(),
             'email' => $this->string()->notNull()->unique(),
             'photo' => $this->string(),
-            'group_id' => $this->smallInteger()->null(),
+            'group_id' => $this->integer()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);

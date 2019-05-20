@@ -14,6 +14,8 @@ use yii\web\IdentityInterface;
  * @property string $username
  * @property string $password
  * @property string $email
+ * @property string $photo
+ * @property integer $group_id
  * @property integer $created_at
  * @property integer $updated_at
 
