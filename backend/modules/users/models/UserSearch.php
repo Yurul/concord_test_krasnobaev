@@ -62,7 +62,6 @@ class UserSearch extends User
         $query->andFilterWhere([
             'id' => $this->id,
             'group_id' => $this->group_id,
-            'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
@@ -70,6 +69,11 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'password', $this->password])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'photo', $this->photo]);
+
+        if($this->created_at){
+            $query->andFilterWhere(['>', 'created_at', time() - $this->created_at]);
+        }
+
 
         return $dataProvider;
     }

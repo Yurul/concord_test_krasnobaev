@@ -29,9 +29,33 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'login',
             'email:email',
-            'group_id',
-            'photo',
-
+            [
+                'attribute'=>'group_id',
+                'label' => 'Role',
+                'value' => function($data){
+                    $role = $data->group->name;
+                    return $role ? $role : 'user';
+                }
+            ],
+            [
+                'attribute'=>'created_at',
+                'label' => 'Created',
+                'value' => function($data){
+                    return date("F j, Y, g:i a", $data->created_at);
+                },
+                'filter'=>[(string)60*60=>'for hour', (string)60*60*24=>'for day', (string)60*60*24*7=>'for week']
+            ],
+            [
+                'label' => 'Photo',
+                'format' => 'raw',
+                'value' => function($data){
+                    $src = $data->getThumbUploadUrl('photo','preview');
+                    return Html::img($src,[
+                        'alt'=>'face',
+                        'style' => 'width:50px;'
+                    ]);
+                },
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
