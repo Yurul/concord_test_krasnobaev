@@ -21,9 +21,19 @@ return [
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'backend\modules\users\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => function(){
+                $db = new \yii\db\Query();
+                $names = $db->select(['name'])
+                    ->from('groups')
+                    ->column();
+                return $names;
+            },
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend

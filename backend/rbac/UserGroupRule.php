@@ -17,12 +17,16 @@ class UserGroupRule extends Rule
 
     public function execute($user, $item, $params)
     {
-        if (!Yii::$app->user->isGuest) {
-            $group = Yii::$app->user->identity->group;
 
-            return $group->name == $item->name;
+        if (! \Yii::$app->user->isGuest) {
+            $role = \Yii::$app->user->identity->group;
 
+            if($role){
+                return $role->name == $item->name;
+            }
         }
-        return false;
+
+
+       return false;
     }
 }

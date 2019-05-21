@@ -8,6 +8,7 @@ use backend\modules\users\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use common\models\Group;
 
 /**
@@ -21,6 +22,27 @@ class UserController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['delete'],
+                        'roles' => ['admin'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create', 'update'],
+                        'roles' => ['admin','manager'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'view'],
+                        'roles' => ['@'],
+                    ],
+
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -130,12 +152,13 @@ class UserController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    protected function getRoles(){
+    protected function getRoles()
+    {
         $groups = Group::find()
             ->select(['name'])
             ->indexBy('id')
             ->column();
 
-        return array_merge(['0'=>'user'], $groups);
+        return array_merge(['0' => 'user'], $groups);
     }
 }

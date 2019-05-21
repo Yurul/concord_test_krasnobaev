@@ -7,6 +7,8 @@
  */
 
 namespace console\controllers;
+
+use backend\rbac\UserGroupRule;
 use yii\console\Controller;
 
 class RolesController extends Controller
@@ -16,10 +18,27 @@ class RolesController extends Controller
     }
 
     public function actionCreate() {
-        echo 'Processing for Create';
+//        $auth = \Yii::$app->authManager;
+//
+//        $rule = new UserGroupRule;
+//        $auth->add($rule);
+//
+//        $manager = $auth->createRole('manager');
+//        $manager->ruleName = $rule->name;
+//        $auth->add($manager);
+//
+//
+//        $admin = $auth->createRole('admin');
+//        $admin->ruleName = $rule->name;
+//        $auth->add($admin);
+
+        echo 'Auth settings created';
     }
 
     public function actionDestroy() {
-        echo 'Processing for Destroy';
+//        $auth = \Yii::$app->authManager;
+//
+//        $auth->removeAll();
+        echo 'All auth settings removed';
     }
 }

@@ -87,7 +87,7 @@ class User extends CommonUser
         parent::afterSave($insert, $changedAttributes);
 
         //after insert operation we get the user id, so we can name photo properly
-        if ($this->getScenario() == 'insert') {
+        if ($insert) {
 
             $oldName = $this->getUploadPath('photo');
             if(is_file($oldName)){
