@@ -26,20 +26,14 @@ class GroupController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['delete'],
+                        'actions' => ['delete','create', 'update'],
                         'roles' => ['admin'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['create', 'update'],
-                        'roles' => ['admin','manager'],
                     ],
                     [
                         'allow' => true,
                         'actions' => ['index', 'view'],
                         'roles' => ['@'],
-                    ],
-
+                    ]
                 ],
             ],
             'verbs' => [

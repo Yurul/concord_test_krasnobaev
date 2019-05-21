@@ -18,6 +18,10 @@ use backend\rbac\UserGroupRule;
  */
 class Group extends CommonGroup
 {
+    /**
+     * @var autoAuthRole if true creates, update or deletes auth roles accordingly to group changes
+     */
+    private $autoAuthRole = true;
 
     /**
      * {@inheritdoc}
@@ -37,22 +41,24 @@ class Group extends CommonGroup
     {
         parent::afterSave($insert, $changedAttributes);
 
-        //Add or update auth role
-        $auth = \Yii::$app->authManager;
+        if($this->autoAuthRole) {
+            //Add or update auth role
+            $auth = \Yii::$app->authManager;
 
-        $rule = $auth->getRule('UserGroup');
-        if(!$rule){
-            $rule = new UserGroupRule;
-            $auth->add($rule);
-        }
+            $rule = $auth->getRule('UserGroup');
+            if (!$rule) {
+                $rule = new UserGroupRule;
+                $auth->add($rule);
+            }
 
-        $newRole = $auth->createRole($this->name);
-        $newRole ->ruleName = $rule->name;
+            $newRole = $auth->createRole($this->name);
+            $newRole->ruleName = $rule->name;
 
-        if ($insert) {
-            $auth->add($newRole);
-        }else{
-            $auth->update($changedAttributes['name'], $newRole);
+            if ($insert) {
+                $auth->add($newRole);
+            } else {
+                $auth->update($changedAttributes['name'], $newRole);
+            }
         }
     }
 
@@ -73,11 +79,14 @@ class Group extends CommonGroup
     {
         parent::afterDelete();
 
-        $auth = \Yii::$app->authManager;
-        $role = $auth->getRole($this->name);
-        if($role){
-            $auth -> remove($role);
+        if($this->autoAuthRole){
+            $auth = \Yii::$app->authManager;
+            $role = $auth->getRole($this->name);
+            if($role){
+                $auth -> remove($role);
+            }
         }
+
      }
 
     public function getUsers()
