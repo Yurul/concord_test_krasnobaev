@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
+        'password_label'=>'Password',
         'roles' => $roles,
         'model' => $model,
     ]) ?>

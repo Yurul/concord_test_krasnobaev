@@ -123,8 +123,4 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password = md5($password);
     }
 
-    public function getGroup()
-    {
-        return $this->hasOne(Group::className(), ['id' => 'group_id']);
-    }
 }

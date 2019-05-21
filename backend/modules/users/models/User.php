@@ -6,7 +6,7 @@ use yii\base\Model;
 use common\models\User as CommonUser;
 use mohorev\file\UploadImageBehavior;
 use yii\behaviors\TimestampBehavior;
-use common\models\Group;
+use common\models\Group as UserGroup;
 
 
 class User extends CommonUser
@@ -118,5 +118,8 @@ class User extends CommonUser
         return false;
     }
 
-
+    public function getGroup()
+    {
+        return $this->hasOne( UserGroup::className(), ['id' => 'group_id']);
+    }
 }

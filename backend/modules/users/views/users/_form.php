@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'password')
         ->passwordInput(['maxlength' => true, 'value'=>''])
-        ->label('New Password') ?>
+        ->label($password_label) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
