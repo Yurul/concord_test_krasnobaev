@@ -1,8 +1,18 @@
-Проект разворачивается как стандартный yii2-advanced 
-инструкция по ссылке
-https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-installation.md) 
-в конце выполнить консольную команду php yii roles/create и используя пользователя 
-логин: admin
-пароль: 111111
-войти в админскую часть. 
-При изменении(удалении) групп пользователей роли авторизации меняются соответственно
+1. Даём папке проекта все права
+2. Запускаем
+	docker-compose up
+3. После запуска сервисов тянем библиотеки
+	docker exec php composer install
+4. Запускаем инициализацию в режиме production ( выбрать 1 )
+	docker exec -it php ./init
+
+фронтенд находится по адресу
+localhost:1111
+Бекенд
+localhost:2222
+
+Вход в бекенд (и фронтенд)
+login: admin
+password: 111111
+
+Само задание в файле test_task.pdf

@@ -33,7 +33,8 @@ class User extends CommonUser
             ['password', 'string', 'min' => 6],
 
             ['photo', 'file', 'extensions' => 'png, jpg, jpeg', 'on' => ['insert', 'update']],
-            ['group_id', 'integer'],
+            ['photo', 'file', 'maxSize' => 1000*1024, 'tooBig'=>'Limit is 1mb', 'on' => ['insert', 'update']],
+	    ['group_id', 'integer'],
             ['group_id', 'isExistingGroup'],
         ];
     }
