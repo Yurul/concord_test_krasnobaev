@@ -1,9 +1,14 @@
 1. Даём папке проекта все права
 2. Запускаем
+
 	docker-compose up
+	
 3. После запуска сервисов тянем библиотеки
+
 	docker exec php composer install
+	
 4. Запускаем инициализацию в режиме production ( выбрать 1 )
+
 	docker exec -it php ./init
 
 фронтенд находится по адресу
