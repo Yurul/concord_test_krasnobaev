@@ -46,11 +46,7 @@ class Group extends CommonGroup
             $auth = \Yii::$app->authManager;
 
             $rule = $auth->getRule('UserGroup');
-            if (!$rule) {
-                $rule = new UserGroupRule;
-                $auth->add($rule);
-            }
-
+            
             $newRole = $auth->createRole($this->name);
             $newRole->ruleName = $rule->name;
 
